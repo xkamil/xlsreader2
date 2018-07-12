@@ -2,15 +2,8 @@ package org.controller;
 
 import com.google.inject.Inject;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.layout.VBox;
 import org.model.DataModel;
 import org.model.FilterFactory;
-import org.model.SuperCell;
-
-import java.util.Collections;
-import java.util.List;
 
 public class FiltersFragmentController {
 
@@ -30,7 +23,7 @@ public class FiltersFragmentController {
 
         filterByWorkbooksController.setLabel("Workbooks");
         filterByWorkbooksController.setOnSelectedValuesUpdated(val -> dataModel
-                .setFilter(FilterFactory.WORKBOOOK, FilterFactory.byWorkbooks(val.toArray(new String[0]))));
+                .setFilter(FilterFactory.WORKBOOK, FilterFactory.byWorkbooks(val.toArray(new String[0]))));
 
         filterBySheetsController.setLabel("Sheets");
         filterBySheetsController.setOnSelectedValuesUpdated(val -> dataModel

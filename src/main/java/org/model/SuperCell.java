@@ -17,10 +17,6 @@ public class SuperCell {
         this.sheetName = cell.getSheet().getSheetName().trim();
     }
 
-    public Cell getCell() {
-        return cell;
-    }
-
     public List<SuperCell> getRow() {
         List<SuperCell> row = new ArrayList<>();
 

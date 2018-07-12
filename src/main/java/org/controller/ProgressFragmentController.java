@@ -27,17 +27,9 @@ public class ProgressFragmentController implements ProgressListener {
         hide();
     }
 
-    public void setLabel(String label) {
-        Platform.runLater(()->progressLabel.setText(label));
-    }
-
     @Override
     public void onProgressStarted(double maxValue) {
-        Platform.runLater(()->{
-            this.maxValue = maxValue;
-            progressBar.setProgress(0.0);
-            show();
-        });
+        Platform.runLater(()-> this.maxValue = maxValue);
     }
 
     @Override
@@ -47,16 +39,16 @@ public class ProgressFragmentController implements ProgressListener {
 
     @Override
     public void onProgressEnded() {
-        Platform.runLater(()->{
-            progressBar.setProgress(1);
-            hide();
-        });
+        Platform.runLater(this::hide);
     }
 
     @Override
-    public void show() {
-        Platform.runLater(()->progressPane.setVisible(true));
-
+    public void show(String label) {
+        Platform.runLater(()->{
+            progressBar.setProgress(0.0);
+            progressLabel.setText(label);
+            progressPane.setVisible(true);
+        });
     }
 
     private void hide() {

@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.function.Predicate;
 
 public final class FilterFactory {
-    public static final String WORKBOOOK = "workbook";
+    public static final String WORKBOOK = "workbook";
     public static final String SHEET = "sheet";
     public static final String HEADER = "header";
     public static final String VALUE = "value";

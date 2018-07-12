@@ -7,7 +7,6 @@ public interface ProgressListener {
 
     void onProgressEnded();
 
-    void show();
+    void show(String label);
 
-    void setLabel(String label);
 }

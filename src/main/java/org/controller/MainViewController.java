@@ -17,7 +17,7 @@ public class MainViewController {
 
     @FXML
     public void initialize() {
-        dataModel.setOnLoadWorkbooksProgressListener(progressController);
+        dataModel.setOnLoadProgressListener(progressController);
     }
 
 }
