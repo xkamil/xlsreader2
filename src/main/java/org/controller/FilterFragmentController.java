@@ -58,7 +58,7 @@ public class FilterFragmentController {
         label.setText(text);
     }
 
-    public void clearFilter(){
+    public void clearFilter() {
         System.out.println("Clear");
         tvFilterBy.textProperty().setValue("");
     }

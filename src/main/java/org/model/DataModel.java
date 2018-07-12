@@ -1,8 +1,13 @@
 package org.model;
 
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import org.apache.log4j.Logger;
 import org.apache.poi.ss.usermodel.*;
+import org.util.WorkbookReader;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
@@ -18,7 +23,7 @@ public class DataModel {
     private Map<String, Predicate<SuperCell>> filters;
 
     private Set<Consumer<List<SuperCell>>> onCellListChangeListeners;
-    private Consumer<Integer> onLoadWorkbooksProgressListener;
+    private ProgressListener onLoadWorkbooksProgressListener;
 
 
     public DataModel() {
@@ -28,14 +33,22 @@ public class DataModel {
         onCellListChangeListeners = new HashSet<>();
     }
 
-    public void setWorkbooks(Map<String, Workbook> workbooks) {
-        this.workbooks = workbooks;
-        this.extractCellsWithHeaders();
-        notifyOnCellListChangeListeners();
-    }
-
-    public List<SuperCell> getCells() {
-        return this.cells;
+    public void setWorkbooks(File dir) {
+        executeAsync(() -> {
+            try {
+                this.onLoadWorkbooksProgressListener.setLabel("Loading workbooks");
+                this.onLoadWorkbooksProgressListener.show();
+                this.workbooks = WorkbookReader.getAllWorkbooks(dir);
+                this.extractCellsWithHeaders();
+                Platform.runLater(this::notifyOnCellListChangeListeners);
+                LOGGER.info(String.format("Loaded %d workbooks: %s", workbooks.size(), workbooks.keySet()));
+            } catch (IOException e) {
+                LOGGER.error(e);
+                return;
+            }finally {
+                onLoadWorkbooksProgressListener.onProgressEnded();
+            }
+        });
     }
 
     public Set<String> getWorkbooks() {
@@ -73,7 +86,7 @@ public class DataModel {
         onCellListChangeListeners.remove(listener);
     }
 
-    public void setOnLoadWorkbooksProgressListener(Consumer<Integer> onLoadWorkbooksProgressListener) {
+    public void setOnLoadWorkbooksProgressListener(ProgressListener onLoadWorkbooksProgressListener) {
         this.onLoadWorkbooksProgressListener = onLoadWorkbooksProgressListener;
     }
 
@@ -83,23 +96,19 @@ public class DataModel {
 
     private void notifyOnCellListChangeListeners() {
         onCellListChangeListeners.forEach(e -> e.accept(cells));
+
     }
 
-    private void notifyProgressListener(final int consumedSheets){
-        workbooks.values().stream()
-                .mapToInt(Workbook::getNumberOfSheets)
-                .reduce(Integer::sum)
-                .ifPresent(sheets -> {
-                    if (onLoadWorkbooksProgressListener != null) {
-                        int progress = (int)((double)consumedSheets / sheets * 100);
-                        onLoadWorkbooksProgressListener.accept(progress);
-                    }
-                });
-    }
 
     private void extractCellsWithHeaders() {
         List<SuperCell> cells = new ArrayList<>();
         AtomicInteger consumedSheets = new AtomicInteger(0);
+
+        int maxValue = workbooks.values().stream()
+                .mapToInt(Workbook::getNumberOfSheets)
+                .reduce(Integer::sum).orElse(0);
+
+        onLoadWorkbooksProgressListener.onProgressStarted(maxValue);
 
         for (Map.Entry<String, Workbook> workbookEntry : workbooks.entrySet()) {
             for (Sheet sheet : workbookEntry.getValue()) {
@@ -109,12 +118,14 @@ public class DataModel {
                             cells.add(new SuperCell(cell, workbookEntry.getKey()));
                         }
                     }
-
                 }
-                notifyProgressListener(consumedSheets.incrementAndGet());
+                onLoadWorkbooksProgressListener.onProgress(consumedSheets.incrementAndGet());
             }
         }
-
         this.cells = cells;
+    }
+
+    private static void executeAsync(Runnable run) {
+        new Thread(run).start();
     }
 }

@@ -45,13 +45,9 @@ public class SearchFragmentController {
     }
 
     @FXML
-    public void onLoadWorkbooks() throws IOException {
+    public void onLoadWorkbooks(){
         File dir = chooseDirectory();
-
-        Map<String, Workbook> workbooks = WorkbookReader.getAllWorkbooks(dir);
-        LOGGER.info(String.format("Loaded %d workbooks: %s", workbooks.size(), workbooks.keySet()));
-
-        dataModel.setWorkbooks(workbooks);
+        dataModel.setWorkbooks(dir);
     }
 
     @FXML

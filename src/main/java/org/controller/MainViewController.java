@@ -5,6 +5,10 @@ import javafx.fxml.FXML;
 import org.model.DataModel;
 
 public class MainViewController {
+
+    @FXML
+    private ProgressFragmentController progressController;
+
     @Inject
     private DataModel dataModel;
 
@@ -13,9 +17,7 @@ public class MainViewController {
 
     @FXML
     public void initialize() {
-        dataModel.setOnLoadWorkbooksProgressListener(c->{
-            System.out.println("Progress: " + c);
-        });
+        dataModel.setOnLoadWorkbooksProgressListener(progressController);
     }
 
 }

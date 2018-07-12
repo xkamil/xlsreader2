@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.control.Tooltip?>
-<VBox maxHeight="-Infinity"
+<VBox maxHeight="200"
       maxWidth="1.7976931348623157E308"
       spacing="4.0"
       xmlns="http://javafx.com/javafx/8.0.121"

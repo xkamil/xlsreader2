@@ -5,6 +5,7 @@ import com.google.inject.Injector;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -25,7 +26,7 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         mainStage = primaryStage;
-        VBox mainView = getLoader("/fxml/main_view.fxml").load();
+        StackPane mainView = getLoader("/fxml/main_view.fxml").load();
 
         Scene scene = new Scene(mainView);
 

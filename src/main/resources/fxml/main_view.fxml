@@ -1,23 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Button?>
+<StackPane xmlns="http://javafx.com/javafx/8.0.121"
+           xmlns:fx="http://javafx.com/fxml/1"
 
-<VBox prefHeight="400.0"
-      prefWidth="600.0"
-      xmlns="http://javafx.com/javafx/8.0.121"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="org.controller.MainViewController">
+           fx:controller="org.controller.MainViewController">
 
-    <fx:include fx:id="search" source="search_fragment.fxml" />
+    <VBox prefHeight="400.0"
+          prefWidth="600.0">
 
-    <TitledPane animated="false"
-                text="Filters">
+        <fx:include fx:id="search"
+                    source="search_fragment.fxml"/>
 
-        <content>
-            <fx:include source="filters_fragment.fxml"/>
-        </content>
+        <TitledPane animated="false"
+                    text="Filters">
 
-    </TitledPane>
-</VBox>
+            <content>
+                <fx:include source="filters_fragment.fxml"/>
+            </content>
+
+        </TitledPane>
+    </VBox>
+
+    <fx:include source="progress_fragment.fxml" fx:id="progress" />
+</StackPane>
+
