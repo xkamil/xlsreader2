@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.layout.VBox?>
+<VBox fx:id="progressPane"
+      alignment="BASELINE_CENTER"
+      maxHeight="Infinity"
+      maxWidth="Infinity"
+      style="-fx-background-color: rgba(255,255,255,0.6);"
+      fx:controller="org.controller.view.ProgressViewController"
+      prefHeight="600"
+      prefWidth="600"
+      xmlns="http://javafx.com/javafx/8"
+      xmlns:fx="http://javafx.com/fxml/1">
+
+    <children>
+
+        <VBox alignment="TOP_CENTER"
+              maxHeight="100.0"
+              maxWidth="200.0"
+              spacing="5.0"
+              style="-fx-background-color: white; -fx-border-image-width: 10; -fx-border-color: gray;">
+            <children>
+                <Label fx:id="progressLabel"
+                       text="Sample label"/>
+                <ProgressBar fx:id="progressBar"
+                             progress="0.0"/>
+            </children>
+            <padding>
+                <Insets bottom="10.0"
+                        left="10.0"
+                        right="10.0"
+                        top="10.0"/>
+            </padding>
+        </VBox>
+    </children>
+</VBox>

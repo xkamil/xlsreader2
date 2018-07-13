@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox xmlns="http://javafx.com/javafx/8.0.121"
+      fx:controller="org.controller.view.section.FilterSectionController"
+      xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <AnchorPane HBox.hgrow="ALWAYS">
+            <fx:include fx:id="filterByWorkbooks"
+                        source="section/fragment/filter_fragment.fxml"
+                        AnchorPane.topAnchor="0.0"
+                        AnchorPane.leftAnchor="0.0"
+                        AnchorPane.rightAnchor="0.0"/>
+        </AnchorPane>
+        <AnchorPane HBox.hgrow="ALWAYS">
+            <fx:include fx:id="filterBySheets"
+                        source="section/fragment/filter_fragment.fxml"
+                        AnchorPane.topAnchor="0.0"
+                        AnchorPane.leftAnchor="0.0"
+                        AnchorPane.rightAnchor="0.0"/>
+        </AnchorPane>
+        <AnchorPane HBox.hgrow="ALWAYS">
+            <fx:include fx:id="filterByColumns"
+                        source="section/fragment/filter_fragment.fxml"
+                        AnchorPane.topAnchor="0.0"
+                        AnchorPane.leftAnchor="0.0"
+                        AnchorPane.rightAnchor="0.0"/>
+        </AnchorPane>
+    </children>
+</HBox>

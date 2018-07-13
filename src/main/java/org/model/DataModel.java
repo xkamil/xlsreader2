@@ -24,11 +24,11 @@ public class DataModel {
     private Set<Consumer<List<SuperCell>>> onCellListChangeListeners = new HashSet<>();
     private ProgressListener onLoadProgressListener;
 
-    public void setWorkbooks(File dir) {
+    public void loadWorkbooks(File directory) {
         new Thread(() -> {
             try {
                 this.onLoadProgressListener.show("Loading workbooks");
-                this.workbooks = WorkbookReader.getAllWorkbooks(dir);
+                this.workbooks = WorkbookReader.getAllWorkbooks(directory);
                 this.extractCellsWithHeaders();
                 Platform.runLater(this::notifyOnCellListChangeListeners);
                 LOGGER.info(String.format("Loaded %d workbooks: %s", workbooks.size(), workbooks.keySet()));
@@ -40,17 +40,17 @@ public class DataModel {
         }).start();
     }
 
-    public Set<String> getWorkbooks() {
+    public Set<String> getWorkbooksNames() {
         return workbooks.keySet();
     }
 
-    public Set<String> getSheets() {
+    public Set<String> getSheetsNames() {
         return cells.parallelStream()
                 .map(SuperCell::getSheetName)
                 .collect(Collectors.toSet());
     }
 
-    public Set<String> getHeaders() {
+    public Set<String> getColumnsNames() {
         return cells.parallelStream()
                 .map(SuperCell::getHeader)
                 .collect(Collectors.toSet());
