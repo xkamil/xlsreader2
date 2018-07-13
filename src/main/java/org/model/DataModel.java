@@ -19,8 +19,6 @@ public class DataModel {
 
     private Map<String, Workbook> workbooks = new HashMap<>();
     private List<SuperCell> cells = new ArrayList<>();
-    private Map<String, Predicate<SuperCell>> filters = new HashMap<>();
-
     private Set<Consumer<List<SuperCell>>> onCellListChangeListeners = new HashSet<>();
     private ProgressListener onLoadProgressListener;
 
@@ -56,23 +54,16 @@ public class DataModel {
                 .collect(Collectors.toSet());
     }
 
-    public List<SuperCell> getFilteredCells() {
-        return cells.parallelStream()
-                .filter(cell -> filters.values().stream().filter(f -> f.test(cell)).count() == filters.size())
-                .collect(Collectors.toList());
-    }
-
-    public void setFilter(String id, Predicate<SuperCell> filter) {
-        LOGGER.info(String.format("Setting %s filter", id));
-        filters.put(id, filter);
-    }
-
     public void addOnCellListChangeListener(Consumer<List<SuperCell>> listener) {
         onCellListChangeListeners.add(listener);
     }
 
     public void setOnLoadProgressListener(ProgressListener onLoadProgressListener) {
         this.onLoadProgressListener = onLoadProgressListener;
+    }
+
+    public List<SuperCell> getCells() {
+        return cells;
     }
 
     private void notifyOnCellListChangeListeners() {

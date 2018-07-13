@@ -4,41 +4,29 @@ import com.google.inject.Inject;
 import javafx.fxml.FXML;
 import org.controller.view.section.fragment.FilterFragmentController;
 import org.model.DataModel;
-import org.model.FilterFactory;
+import org.model.filter.FilterBy;
 
 public class FilterSectionController {
-
-
-    @FXML
-    public FilterFragmentController filterByWorkbooksController;
-    @FXML
-    public FilterFragmentController filterBySheetsController;
-    @FXML
-    public FilterFragmentController filterByColumnsController;
-
-    @Inject
-    private DataModel dataModel;
+    @FXML private FilterFragmentController filterByWorkbooksController;
+    @FXML private FilterFragmentController filterBySheetsController;
+    @FXML private FilterFragmentController filterByColumnsController;
+    @Inject private DataModel dataModel;
 
     @FXML
     public void initialize() {
-
         filterByWorkbooksController.setLabel("Workbooks");
-        filterByWorkbooksController.setOnSelectedValuesUpdated(val -> dataModel
-                .setFilter(FilterFactory.WORKBOOK, FilterFactory.byWorkbooks(val.toArray(new String[0]))));
+        filterByWorkbooksController.setFilterBy(FilterBy.WORKBOOK);
 
         filterBySheetsController.setLabel("Sheets");
-        filterBySheetsController.setOnSelectedValuesUpdated(val -> dataModel
-                .setFilter(FilterFactory.SHEET, FilterFactory.bySheets(val.toArray(new String[0]))));
+        filterBySheetsController.setFilterBy(FilterBy.SHEET);
 
         filterByColumnsController.setLabel("Columns");
-        filterByColumnsController.setOnSelectedValuesUpdated(val -> dataModel
-                .setFilter(FilterFactory.HEADER, FilterFactory.byHeaders(val.toArray(new String[0]))));
+        filterByColumnsController.setFilterBy(FilterBy.COLUMN);
 
         dataModel.addOnCellListChangeListener(cells -> {
-            filterByWorkbooksController.updateValues(dataModel.getWorkbooksNames());
-            filterBySheetsController.updateValues(dataModel.getSheetsNames());
-            filterByColumnsController.updateValues(dataModel.getColumnsNames());
+            filterByWorkbooksController.updateItemsList(dataModel.getWorkbooksNames());
+            filterBySheetsController.updateItemsList(dataModel.getSheetsNames());
+            filterByColumnsController.updateItemsList(dataModel.getColumnsNames());
         });
     }
-
 }

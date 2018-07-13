@@ -7,51 +7,46 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import org.model.DataModel;
+import org.model.FilterFactory;
+import org.model.MatchType;
+import org.model.SuperCell;
+import org.model.filter.Filter;
+import org.model.filter.FilterBy;
+import org.model.filter.FilterSource;
 
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class FilterFragmentController {
+public class FilterFragmentController implements FilterSource {
 
-    @FXML
-    public TextField tvFilterBy;
-    @FXML
-    public VBox itemsList;
-    @FXML
-    public Label label;
-    @FXML
-    public CheckBox cbSelectAll;
-
-    @Inject
-    private DataModel dataModel;
-
-    private List<String> selectedValues;
-
-
-    private Consumer<List<String>> onSelectedValuesUpdated;
+    @FXML private TextField tvFilterBy;
+    @FXML private VBox itemsList;
+    @FXML private Label label;
+    @FXML private CheckBox cbSelectAll;
+    @Inject private DataModel dataModel;
+    @Inject private Filter filer;
+    private FilterBy filterBy;
 
     @FXML
     public void initialize() {
         tvFilterBy.textProperty().addListener((observable, oldValue, newValue) -> filterDisplayedValues(newValue));
         cbSelectAll.setOnAction(e -> toggleSelectAllValues());
+        filer.registerFilterSource(this);
     }
 
-    public void setOnSelectedValuesUpdated(Consumer<List<String>> onSelectedValuesUpdated) {
-        this.onSelectedValuesUpdated = onSelectedValuesUpdated;
-    }
-
-    public void updateValues(Set<String> values) {
+    public void updateItemsList(Set<String> values) {
         itemsList.getChildren().clear();
 
         values.forEach(val -> {
             CheckBox checkBox = new CheckBox(val);
-            checkBox.setOnAction(e -> updateSelectedValues());
+            checkBox.setSelected(true);
             itemsList.getChildren().add(checkBox);
         });
 
-        cbSelectAll.fire();
+        cbSelectAll.setSelected(true);
     }
 
     public void setLabel(String text) {
@@ -59,18 +54,17 @@ public class FilterFragmentController {
     }
 
     public void clearFilter() {
-        System.out.println("Clear");
         tvFilterBy.textProperty().setValue("");
+    }
+
+    public void setFilterBy(FilterBy filterBy) {
+        this.filterBy = filterBy;
     }
 
     private void toggleSelectAllValues() {
         getCheckBoxes().stream()
                 .filter(CheckBox::isVisible)
-                .forEach(c -> {
-                    if (cbSelectAll.isSelected() != c.isSelected()) {
-                        c.fire();
-                    }
-                });
+                .forEach(c -> c.setSelected(cbSelectAll.isSelected()));
     }
 
     private List<CheckBox> getCheckBoxes() {
@@ -92,15 +86,13 @@ public class FilterFragmentController {
                 });
     }
 
-    private void updateSelectedValues() {
-        selectedValues = itemsList.getChildren().stream()
-                .map(c -> (CheckBox) c)
+    @Override
+    public Predicate<SuperCell> getFilter() {
+        String[] selectedValues = this.getCheckBoxes().stream()
                 .filter(CheckBox::isSelected)
                 .map(CheckBox::getText)
-                .collect(Collectors.toList());
+                .toArray(String[]::new);
 
-        if (onSelectedValuesUpdated != null) {
-            onSelectedValuesUpdated.accept(selectedValues);
-        }
+        return FilterFactory.build(filterBy, MatchType.EQUALS, selectedValues);
     }
 }
