@@ -10,16 +10,11 @@ import org.model.ProgressListener;
 
 
 public class ProgressViewController implements ProgressListener {
-
     private static final Logger LOGGER = Logger.getLogger(ProgressViewController.class);
 
-    @FXML
-    public Label progressLabel;
-    @FXML
-    public ProgressBar progressBar;
-    @FXML
-    private VBox progressPane;
-
+    @FXML public Label progressLabel;
+    @FXML public ProgressBar progressBar;
+    @FXML private VBox progressPane;
     private double maxValue;
 
     @FXML

@@ -7,20 +7,22 @@
 <?import javafx.scene.layout.HBox?>
 <?import org.controller.view.component.CancelButton?>
 
-<HBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" spacing="5.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.controller.view.section.SearchSectionController">
+<HBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" spacing="5.0"
+      xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.controller.view.section.SearchSectionController">
 
     <padding>
-        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
     </padding>
 
-    <ComboBox fx:id="cbMatchType" prefHeight="25.0" prefWidth="122.0" promptText="Match type" />
-   <TextField fx:id="tvSeparator" prefWidth="20.0" />
+    <ComboBox fx:id="cbMatchType" prefHeight="25.0" prefWidth="122.0" promptText="Match type"/>
+    <TextField fx:id="tvSeparator" prefWidth="20.0"/>
 
-    <TextField fx:id="tvCellValue" promptText="Cell value..." HBox.hgrow="ALWAYS" />
+    <TextField fx:id="tvCellValue" promptText="Cell value..." HBox.hgrow="ALWAYS"/>
 
-    <CancelButton onAction="#clearFilter" />
+    <CancelButton onAction="#clearFilter"/>
 
-    <Button defaultButton="true" mnemonicParsing="false" onAction="#onSearch" text="Search" />
+    <Button defaultButton="true" mnemonicParsing="false" onAction="#onSearch" text="Search"/>
 
-    <Button mnemonicParsing="false" onAction="#onLoadWorkbooks" text="Load workbooks" />
+    <Button mnemonicParsing="false" onAction="#onLoadWorkbooks" text="Load workbooks"/>
 </HBox>

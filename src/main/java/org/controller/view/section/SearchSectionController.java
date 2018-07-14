@@ -1,5 +1,6 @@
 package org.controller.view.section;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.inject.Inject;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;

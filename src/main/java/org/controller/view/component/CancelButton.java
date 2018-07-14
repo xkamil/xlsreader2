@@ -6,8 +6,8 @@ import javafx.scene.control.Button;
 import java.io.IOException;
 
 public class CancelButton extends Button {
-    private final static double OPACITY = 0.8;
-    private final static double ACTIVE_OPACITY = 0.5;
+    private final static double INITIAL_OPACITY = 0.8;
+    private final static double HOVER_OPACITY = 0.5;
 
 
     public CancelButton() {
@@ -25,8 +25,8 @@ public class CancelButton extends Button {
     }
 
     private void initView() {
-        this.setOpacity(OPACITY);
-        this.setOnMouseEntered(e -> setOpacity(ACTIVE_OPACITY));
-        this.setOnMouseExited(e -> setOpacity(OPACITY));
+        this.setOpacity(INITIAL_OPACITY);
+        this.setOnMouseEntered(e -> setOpacity(HOVER_OPACITY));
+        this.setOnMouseExited(e -> setOpacity(INITIAL_OPACITY));
     }
 }
