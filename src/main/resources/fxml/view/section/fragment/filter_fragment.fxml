@@ -52,26 +52,6 @@
                         right="2.0"
                         top="2.0"/>
             </padding>
-            <CheckBox mnemonicParsing="false"
-                      text="CheckBox"/>
-            <CheckBox mnemonicParsing="false"
-                      text="CheckBox"/>
-            <CheckBox mnemonicParsing="false"
-                      text="CheckBox"/>
-            <CheckBox mnemonicParsing="false"
-                      text="CheckBox"/>
-            <CheckBox mnemonicParsing="false"
-                      text="CheckBox"/>
-            <CheckBox mnemonicParsing="false"
-                      text="CheckBox"/>
-            <CheckBox mnemonicParsing="false"
-                      text="CheckBox"/>
-            <CheckBox mnemonicParsing="false"
-                      text="CheckBox"/>
-            <CheckBox mnemonicParsing="false"
-                      text="CheckBox"/>
-            <CheckBox mnemonicParsing="false"
-                      text="CheckBox"/>
         </VBox>
     </ScrollPane>
 </VBox>

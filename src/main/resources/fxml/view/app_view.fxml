@@ -10,8 +10,8 @@
 
            fx:controller="org.controller.view.AppViewController">
 
-    <VBox prefHeight="400.0"
-          prefWidth="600.0">
+    <VBox
+          prefWidth="800.0" minWidth="600" minHeight="600">
 
         <fx:include fx:id="search"
                     source="section/search_section.fxml"/>

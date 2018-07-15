@@ -1,28 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.controller.view.section.ResultSectionController">
+    <children>
 
-<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: red;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.controller.view.section.ResultSectionController">
-    <TitledPane animated="false" text="Filter displayed columns" VBox.vgrow="ALWAYS">
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-    </TitledPane>
+        <!--Column filter-->
 
-    <TableView fx:id="resultTable" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
-        <columns>
-            <TableColumn prefWidth="75.0" text="C1" />
-            <TableColumn prefWidth="75.0" text="C2" />
-        </columns>
-    </TableView>
+        <TitledPane fx:id="filterDisplayedColumnsContainer" animated="false" text="Filter displayed columns" VBox.vgrow="ALWAYS">
+            <content>
+                <AnchorPane>
+                    <children>
+                        <VBox maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <children>
+                        <HBox spacing="5.0" VBox.vgrow="NEVER">
+                           <children>
+                              <TextField id="tvFilter" fx:id="tvFilter" promptText="Filter by..." />
+                              <Button fx:id="btnSelectAll" mnemonicParsing="false" onAction="#selectAll" text="Select ALL" />
+                              <Button fx:id="btnSelectNone" mnemonicParsing="false" onAction="#selectNone" text="Select NONE" />
+                              <ToggleButton mnemonicParsing="false" text="Show selected" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                                <FlowPane fx:id="containerForBtnFilterColumn" hgap="2.0" nodeOrientation="LEFT_TO_RIGHT" rowValignment="BOTTOM" vgap="2.0" VBox.vgrow="ALWAYS">
+                                    <children>
 
-    <Label fx:id="statusBar">
-        <VBox.margin>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-        </VBox.margin>
-    </Label>
+                                    </children>
+
+                                </FlowPane>
+                            </children>
+                        </VBox>
+                    </children>
+                </AnchorPane>
+            </content>
+        </TitledPane>
+
+
+        <!--Table view-->
+
+        <TableView fx:id="resultTable" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+        </TableView>
+
+        <!--Status bar -->
+
+        <Label fx:id="statusBar" VBox.vgrow="NEVER">
+            <VBox.margin>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </VBox.margin>
+        </Label>
+    </children>
 </VBox>
