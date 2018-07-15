@@ -9,21 +9,21 @@
     <children>
         <AnchorPane HBox.hgrow="ALWAYS">
             <fx:include fx:id="filterByWorkbooks"
-                        source="section/fragment/filter_fragment.fxml"
+                        source="fragment/filter_fragment.fxml"
                         AnchorPane.topAnchor="0.0"
                         AnchorPane.leftAnchor="0.0"
                         AnchorPane.rightAnchor="0.0"/>
         </AnchorPane>
         <AnchorPane HBox.hgrow="ALWAYS">
             <fx:include fx:id="filterBySheets"
-                        source="section/fragment/filter_fragment.fxml"
+                        source="fragment/filter_fragment.fxml"
                         AnchorPane.topAnchor="0.0"
                         AnchorPane.leftAnchor="0.0"
                         AnchorPane.rightAnchor="0.0"/>
         </AnchorPane>
         <AnchorPane HBox.hgrow="ALWAYS">
             <fx:include fx:id="filterByColumns"
-                        source="section/fragment/filter_fragment.fxml"
+                        source="fragment/filter_fragment.fxml"
                         AnchorPane.topAnchor="0.0"
                         AnchorPane.leftAnchor="0.0"
                         AnchorPane.rightAnchor="0.0"/>

@@ -14,16 +14,14 @@
           prefWidth="600.0">
 
         <fx:include fx:id="search"
-                    source="../search_section.fxml"/>
+                    source="section/search_section.fxml"/>
 
         <TitledPane animated="false"
                     text="Filters">
-
-            <content>
-                <fx:include source="../filter_section.fxml"/>
-            </content>
-
+            <fx:include source="section/filter_section.fxml"/>
         </TitledPane>
+
+        <fx:include source="section/result_section.fxml"/>
     </VBox>
 
     <fx:include source="progress_view.fxml" fx:id="progress" />

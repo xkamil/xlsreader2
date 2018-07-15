@@ -25,6 +25,7 @@ public class SearchSectionController implements FilterSource {
 
     @Inject private Filter filter;
     @Inject private DataModel dataModel;
+    @Inject private ResultSectionController resultSection;
     @FXML private ComboBox<String> cbMatchType;
     @FXML private TextField tvCellValue;
     @FXML private TextField tvSeparator;
@@ -46,10 +47,13 @@ public class SearchSectionController implements FilterSource {
     public void onSearch() {
         List<SuperCell> filteredCells = filter.filter(dataModel.getCells()); //TODO
 
-        LOGGER.info(String.format("Found %d cells with content %s : %s",
+        String status = String.format("Found %d cells with content %s : %s",
                 filteredCells.size(),
                 cbMatchType.getValue().toLowerCase(),
-                tvCellValue.getText()));
+                tvCellValue.getText());
+
+        resultSection.displayCells(filteredCells);
+        resultSection.displayStatus(status);
     }
 
     @FXML

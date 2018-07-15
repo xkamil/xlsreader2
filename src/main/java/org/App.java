@@ -23,7 +23,7 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         mainStage = primaryStage;
-        StackPane mainView = getLoader("/fxml/view/section/app_view.fxml").load();
+        StackPane mainView = getLoader("/fxml/view/app_view.fxml").load();
 
         Scene scene = new Scene(mainView);
 
