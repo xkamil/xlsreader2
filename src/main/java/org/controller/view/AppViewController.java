@@ -7,7 +7,7 @@ import org.model.DataModel;
 
 public class AppViewController {
 
-    @FXML private ProgressViewController progressController;
+    @Inject private ProgressViewController progressController;
     @FXML SearchSectionController searchFragmentController;
     @Inject private DataModel dataModel;
 

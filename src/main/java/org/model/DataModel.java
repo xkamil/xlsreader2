@@ -2,7 +2,10 @@ package org.model;
 
 import javafx.application.Platform;
 import org.apache.log4j.Logger;
-import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.util.WorkbookReader;
 
 import java.io.File;
@@ -10,8 +13,6 @@ import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
-import java.util.function.Predicate;
-
 import java.util.stream.Collectors;
 
 public class DataModel {

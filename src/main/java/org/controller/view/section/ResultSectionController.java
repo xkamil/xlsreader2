@@ -16,6 +16,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ResultSectionController {
+    private static final double FILTER_BUTTON_MAX_WIDTH = 200;
+    private static final double TABLE_COLUMN_MAX_WIDTH = 300;
+
     @FXML public TitledPane filterDisplayedColumnsContainer;
     @FXML private FlowPane containerForBtnFilterColumn;
     @FXML private Label statusBar;
@@ -71,6 +74,7 @@ public class ResultSectionController {
         dataModel.getColumnsNames()
                 .forEach(columnName -> {
                     TableColumn tc = new TableColumn(columnName);
+                    tc.setMaxWidth(TABLE_COLUMN_MAX_WIDTH);
                     tableColumns.add(tc);
                     tc.setCellValueFactory(new MapValueFactory<String>(columnName));
                 });
@@ -81,7 +85,11 @@ public class ResultSectionController {
     private void addFilterColumnsButtons() {
         containerForBtnFilterColumn.getChildren().clear();
         columnFiltersButtonsList.clear();
-        dataModel.getColumnsNames().forEach(col -> columnFiltersButtonsList.add(new BtnColumnFilter(col)));
+        dataModel.getColumnsNames().forEach(col -> {
+            BtnColumnFilter btn = new BtnColumnFilter(col);
+            btn.setMaxWidth(FILTER_BUTTON_MAX_WIDTH);
+            columnFiltersButtonsList.add(btn);
+        });
         containerForBtnFilterColumn.getChildren().addAll(columnFiltersButtonsList);
     }
 

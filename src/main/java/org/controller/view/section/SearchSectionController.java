@@ -1,6 +1,5 @@
 package org.controller.view.section;
 
-import com.google.common.annotations.VisibleForTesting;
 import com.google.inject.Inject;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -40,7 +39,9 @@ public class SearchSectionController implements FilterSource {
     @FXML
     public void onLoadWorkbooks() {
         File dir = chooseDirectory();
-        dataModel.loadWorkbooks(dir);
+        if(dir != null){
+            dataModel.loadWorkbooks(dir);
+        }
     }
 
     @FXML

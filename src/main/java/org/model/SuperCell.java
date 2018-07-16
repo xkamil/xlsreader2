@@ -32,45 +32,41 @@ public class SuperCell {
         return workbookName;
     }
 
-    public String getSheetName(){
+    public String getSheetName() {
         return sheetName;
     }
 
     public String getHeader() {
         Cell headerCell = cell.getSheet().getRow(0).getCell(cell.getColumnIndex());
-        return new SuperCell(headerCell, "").getValue();
+
+        if (headerCell == null) {
+            return "";
+        } else {
+            return getCellStringValue(headerCell);
+        }
     }
 
     public String getValue() {
-        String value;
+        return getCellStringValue(cell);
+    }
 
+    private static String getCellStringValue(Cell cell) {
         CellType type = cell.getCellTypeEnum() == CellType.FORMULA ?
                 cell.getCachedFormulaResultTypeEnum() : cell.getCellTypeEnum();
 
         switch (type) {
             case STRING:
-                value = cell.getStringCellValue();
-                break;
+                return cell.getStringCellValue().trim();
             case NUMERIC:
-                value = String.valueOf((int) cell.getNumericCellValue());
-                break;
+                return String.valueOf((int) cell.getNumericCellValue()).trim();
             case BOOLEAN:
-                value = String.valueOf(cell.getBooleanCellValue());
-                break;
+                return String.valueOf(cell.getBooleanCellValue()).trim();
             case BLANK:
-                value = "";
-                break;
             case ERROR:
-                value = "";
-                break;
             case _NONE:
-                value = "";
-                break;
             default:
-                value = "";
+                return "";
         }
-
-        return value.trim();
     }
 
     @Override

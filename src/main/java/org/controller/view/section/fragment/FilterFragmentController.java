@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.VBox;
 import org.model.DataModel;
 import org.model.FilterFactory;
@@ -16,11 +17,11 @@ import org.model.filter.FilterSource;
 
 import java.util.List;
 import java.util.Set;
-import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class FilterFragmentController implements FilterSource {
+    private static final double CHECKBOX_LABEL_MAX_SIZE = 200;
 
     @FXML private TextField tvFilterBy;
     @FXML private VBox itemsList;
@@ -42,6 +43,8 @@ public class FilterFragmentController implements FilterSource {
 
         values.forEach(val -> {
             CheckBox checkBox = new CheckBox(val);
+            checkBox.setMaxWidth(CHECKBOX_LABEL_MAX_SIZE);
+            checkBox.setTooltip(new Tooltip(val));
             checkBox.setSelected(true);
             itemsList.getChildren().add(checkBox);
         });
